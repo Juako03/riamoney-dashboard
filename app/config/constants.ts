@@ -1,10 +1,10 @@
-// Moneda base por defecto para la aplicación
+// Default base currency for the application
 export const DEFAULT_BASE_CURRENCY = "EUR";
 
-// Moneda de destino por defecto para el conversor
+// Default target currency for the converter
 export const DEFAULT_TARGET_CURRENCY = "USD";
 
-// Configuración de la tabla de tasas
+// Exchange rates table configuration
 export const RATES_CONFIG = {
   majorCurrencies: [
     "AUD",
@@ -21,7 +21,7 @@ export const RATES_CONFIG = {
   displayCount: 10,
 } as const;
 
-// Configuración del histórico
+// Historical chart configuration
 export const HISTORY_CONFIG = {
   days: 30,
   interactivePointsLimit: 30,

@@ -18,9 +18,9 @@ The core innovation of this dashboard is the custom-built historical exchange ra
 
 ## AI Usage and Trade-offs
 
-Artificial Intelligence was utilized throughout the development process to accelerate implementation and ensure code quality. Specifically, AI assistants were used to generate initial component structures, debug complex logic in the currency conversion algorithms, and refactor code for better maintainability. 
+Artificial Intelligence was integrated into the software development lifecycle following a structured methodology to enhance productivity and architectural integrity. Initially, it was leveraged for **Scaffolding & Architecture** to generate a robust project skeleton, establishing the Next.js 15 App Router structure and TypeScript configuration. During the **Implementation Phase**, AI assistants facilitated the creation of complex logic, including the custom SVG rendering algorithms and asynchronous state management, while also translating design requirements into responsive Tailwind UI components. Finally, in the **Optimization & QA Phase**, AI tools were employed for code depuration, resolving ESLint violations, and refactoring hardcoded values into centralized configuration files to ensure maintainability.
 
-Regarding trade-offs, the decision was made to build a custom SVG chart rather than importing a comprehensive library like Recharts or Chart.js. While this required more initial development effort, it resulted in a lighter application with no external dependencies for visualization. Additionally, the project uses the free Frankfurter API. While this provides reliable data from the European Central Bank, it may have limitations compared to enterprise-grade paid APIs, which was considered an acceptable trade-off for this demonstration.
+Regarding assumptions and trade-offs, the historical chart was implemented based on the assumption that users might be investors interested in visualizing currency fluctuations over the last month. Additionally, for the exchange rates table, the selection of the top 10 major world currencies was determined by evaluating market movements from various sources, assuming these are the most relevant for the user base.
 
 ## Setup Instructions
 
@@ -38,4 +38,4 @@ Regarding trade-offs, the decision was made to build a custom SVG chart rather t
 
 ## Deployment
 
-The application is optimized for deployment on Vercel. You can view the live deployment here: [Insert Vercel Deployment Link Here]
+The application is optimized for deployment on Vercel. You can view the live deployment here: https://riamoney-dashboard.vercel.app

@@ -11,19 +11,23 @@ type Props = {
   defaultTo: string;
 };
 
+// Data structure for historical exchange rate points
 type HistoryPoint = {
   date: string;
   rate: number;
 };
 
+// SVG chart component for 30-day historical exchange rate visualization
 function HistoryChart({ points, from, to }: { points: HistoryPoint[]; from: string; to: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  // Chart dimensions and padding
   const width = 350;
   const height = 250;
   const paddingX = 55;
   const paddingY = 20;
 
+  // Calculate min/max/median values for Y-axis scaling
   const values = points.length > 0 ? points.map((p) => p.rate) : [0];
   const minValRaw = Math.min(...values);
   const maxValRaw = Math.max(...values);
@@ -38,6 +42,7 @@ function HistoryChart({ points, from, to }: { points: HistoryPoint[]; from: stri
 
   const n = points.length;
 
+  // Map data points to SVG coordinates
   const pointCoordinates = useMemo(() => {
     return points.map((p, i) => {
       const x =
@@ -247,6 +252,7 @@ export default function CurrencyConverter({
   defaultFrom,
   defaultTo,
 }: Props) {
+  // Converter state: amount, currencies, and conversion result
   const [amount, setAmount] = useState(1);
   const [from, setFrom] = useState(defaultFrom);
   const [to, setTo] = useState(defaultTo);
@@ -254,16 +260,19 @@ export default function CurrencyConverter({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Historical chart state
   const [history, setHistory] = useState<HistoryPoint[] | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState<string | null>(null);
 
   const currencyCodes = Object.keys(currencies);
 
+  // Auto-convert on amount/currency change with 300ms debounce
   useEffect(() => {
     let cancelled = false;
 
     async function autoConvert() {
+      // Handle edge cases
       if (amount < 0) {
         setResult(null);
         return;
@@ -321,6 +330,7 @@ export default function CurrencyConverter({
     };
   }, [amount, from, to]);
 
+  // Fetch 30-day historical data when currency pair changes
   useEffect(() => {
     let cancelled = false;
 
@@ -330,6 +340,7 @@ export default function CurrencyConverter({
         setHistoryError(null);
         setHistory(null);
 
+        // Generate flat 1:1 history for same currency
         if (from === to) {
           const today = new Date();
           const points: HistoryPoint[] = [];

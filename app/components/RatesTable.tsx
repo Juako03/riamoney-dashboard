@@ -10,6 +10,7 @@ type Props = {
   initialRates: RatesResponse;
 };
 
+// Selects which currencies to display: prioritizes major currencies, fills remaining slots
 function computeDisplayCodes(
   base: string,
   rates: RatesResponse
@@ -45,6 +46,7 @@ function computeDisplayCodes(
 }
 
 export default function RatesTable({ base, currencies, initialRates }: Props) {
+  // Component state: manages selected base currency and fetched rates
   const [currentBase, setCurrentBase] = useState(base);
   const [rates, setRates] = useState<RatesResponse>(initialRates);
   const [displayCodes, setDisplayCodes] = useState<string[]>(() =>
@@ -55,6 +57,7 @@ export default function RatesTable({ base, currencies, initialRates }: Props) {
 
   const baseOptions = Object.keys(currencies).sort((a, b) => a.localeCompare(b));
 
+  // Format date with weekday and 24-hour time in UTC
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr + 'T23:59:00Z');
     const options: Intl.DateTimeFormatOptions = {
@@ -71,6 +74,7 @@ export default function RatesTable({ base, currencies, initialRates }: Props) {
     return date.toLocaleString('en-US', options).replace(',', '');
   };
 
+  // Fetch new rates when base currency changes
   useEffect(() => {
     if (currentBase === base) {
       setRates(initialRates);
@@ -110,11 +114,11 @@ export default function RatesTable({ base, currencies, initialRates }: Props) {
         <h2 className="text-3xl font-bold">Exchange Rates Overview</h2>
       </div>
 
-      {/* Estado de carga / error */}
+      {/* Loading and error states */}
       {loading && <p className="text-sm text-gray-600">Loading rates...</p>}
       {error && <p className="text-sm text-red-600">{error}</p>}
 
-      {/* Tabla de tasas */}
+      {/* Rates table */}
       {!loading && !error && (
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
           <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-300">

@@ -2,6 +2,7 @@ const BASE_URL = "https://api.frankfurter.app";
 
 export type CurrenciesMap = Record<string, string>;
 
+// Response structure for exchange rate queries
 export interface RatesResponse {
   amount: number;
   base: string;
@@ -9,6 +10,7 @@ export interface RatesResponse {
   rates: Record<string, number>;
 }
 
+// Fetch the list of all available currencies from the API
 export async function getCurrencies(): Promise<CurrenciesMap> {
   const res = await fetch(`${BASE_URL}/currencies`);
 
@@ -20,6 +22,7 @@ export async function getCurrencies(): Promise<CurrenciesMap> {
   return data;
 }
 
+// Get the latest exchange rates for a specific base currency
 export async function getLatestRates(base: string): Promise<RatesResponse> {
   const url = `${BASE_URL}/latest?from=${encodeURIComponent(base)}`;
 
@@ -33,6 +36,7 @@ export async function getLatestRates(base: string): Promise<RatesResponse> {
   return data;
 }
 
+// Convert a specific amount from one currency to another
 export async function convertCurrency(
   amount: number,
   from: string,
@@ -50,6 +54,7 @@ export async function convertCurrency(
 
   const data = (await res.json()) as RatesResponse;
 
+  // Extract the converted value from the response
   const rateValues = Object.values(data.rates);
   if (rateValues.length === 0) {
     throw new Error("No rate returned from Frankfurter API");
@@ -58,20 +63,22 @@ export async function convertCurrency(
   return rateValues[0];
 }
 
+// Response structure for historical time series data
 export interface TimeSeriesResponse {
   amount: number;
   base: string;
   start_date: string;
   end_date: string;
   rates: Record<
-    string, // fecha YYYY-MM-DD
-    Record<string, number> // { "USD": 1.09, ... }
+    string, // Date in YYYY-MM-DD format
+    Record<string, number> // Currency rates (e.g., { "USD": 1.09 })
   >;
 }
 
+// Fetch historical exchange rate data for a date range
 export async function getTimeSeries(
-  fromDate: string, // "2024-01-01"
-  toDate: string, // "2024-01-31"
+  fromDate: string,
+  toDate: string,
   base: string,
   to: string[]
 ): Promise<TimeSeriesResponse> {
