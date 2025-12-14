@@ -121,7 +121,7 @@ export default function RatesTable({ base, currencies, initialRates }: Props) {
       {/* Rates table */}
       {!loading && !error && (
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
-          <div className="flex justify-between items-center mb-4 pb-3 border-b border-gray-300">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 pb-3 border-b border-gray-300">
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium">Base currency:</label>
               <select
