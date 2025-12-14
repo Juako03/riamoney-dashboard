@@ -26,9 +26,9 @@ Regarding assumptions and trade-offs, the historical chart was implemented based
 
 Given additional development time, the following features would significantly improve the application:
 
-**API Response Caching**: Implementing a caching layer using Vercel KV or Next.js revalidation strategies would dramatically reduce API calls to the Frankfurter service. Since exchange rates update only once daily from the European Central Bank, caching responses for 1-2 hours would improve load times by up to 90% while maintaining data accuracy.
+**API Response Caching**: Implementing a caching layer using Vercel KV or Next.js revalidation strategies would dramatically reduce API calls to the Frankfurter service. Since exchange rates update only once daily from the European Central Bank, caching responses for 1-2 hours would improve load times while maintaining data accuracy.
 
-**Internationalization (i18n)**: Adding multi-language support would expand the application's accessibility. Implementing Next.js internationalized routing with language files for English, Spanish, and other major languages would allow users to interact with the interface in their preferred language, improving user experience for a global audience.
+**Language settings**: Adding multi-language support would expand the application's accessibility. Implementing Next.js internationalized routing with language files for English, Spanish, and other major languages would allow users to interact with the interface in their preferred language, improving user experience for a global audience.
 
 **Variable Historical Timeframes**: Extending the historical chart to support multiple time ranges (7 days, 30 days, 60 days, 90 days, 1 year) would provide users with more flexibility in analyzing currency trends. This would require API modifications to handle dynamic date ranges and UI controls for timeframe selection.
 
